@@ -21,6 +21,5 @@ namespace shop
             IQueryable<TransactionHeader> query = _db.TransactionHeaders;
             return query;
         }
-
     }
 }

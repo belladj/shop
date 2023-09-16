@@ -188,8 +188,7 @@ namespace shop.Actions
                 try
                 {
                     List<TransactionDetail> items = new List<TransactionDetail>();
-                    var cartItems = _db.CartItems.Where(
-                    c => c.CartId == ShoppingCartId);
+                    var cartItems = GetCartItems();
                     foreach (var cartItem in cartItems)
                     {
                         var Item = new TransactionDetail
@@ -214,7 +213,7 @@ namespace shop.Actions
                             HttpContext.Current.User.Identity.Name : "guest",
                         Total = GetTotal(),
                         Date = DateTime.Now,
-                        ItemList = items
+                        ItemList = new List<TransactionDetail>(items)
                     };
                     _db.TransactionHeaders.Add(Transaction);
                     _db.SaveChanges();
